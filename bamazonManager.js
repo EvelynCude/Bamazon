@@ -189,10 +189,9 @@ function addProduct(){
                 if (err) throw err;
                 console.log("You've successfully added %s.  It is now being sold on Bamazon.", data.product);
                 // Call updateProduct AFTER the INSERT completes
-
             }
         );
-
+        exitOption();
     });
 
 };

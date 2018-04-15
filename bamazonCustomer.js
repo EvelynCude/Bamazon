@@ -65,11 +65,13 @@ function mainMenu(){
                 }else{
                     var purchasePrice = res[0].price * parseInt(answer.quantity);
                     var updateStock = res[0].stock_quantity - parseInt(answer.quantity);
+                    var updateSales = res[0].product_sales + answer.quantity * res[0].price;
                     connection.query(
                         'UPDATE products SET ? WHERE ?', 
                         [
                             {
-                                stock_quantity: updateStock
+                                stock_quantity: updateStock,
+                                product_sales: updateSales
                             }, 
                             {
                                 item_id: answer.itemID
