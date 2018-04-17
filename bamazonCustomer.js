@@ -22,7 +22,7 @@ connection.connect(function (err) {
     console.log("|```````````````````".blue.bold + "\\/______/\\/___/ \\___\\_/\\/\\/____/____/\\___\\_________/______/ \\/__/\\ \\____\\".red.bold + "````````````````````|".blue.bold);
     console.log("|`````````````````````````````````".blue.bold + "\\/____/               \\/___/                        \\/____/".red.bold + "````````````````````|".blue.bold);
     console.log("|````````````````````````````````````````````````````````````````````````````````````````````````````````````````|".blue.bold);
-    console.log("|________________________________________________________________________________________________________________|".blue.bold);
+    console.log("|________________________________________________________________________________________________________________|\n".blue.bold);
     showProducts();
 });
 
@@ -30,7 +30,7 @@ function showProducts(){
     connection.query('SELECT item_id, product_name, price FROM products', function (err, res) {
         var table = new Table({
             head: ['Item ID', 'Product Name', 'Price ($)']
-            , colWidths: [10, 55, 20]
+            , colWidths: [10, 80, 20]
         });
         for (i = 0; i < res.length; i++) {
             table.push([res[i].item_id, res[i].product_name, res[i].price]);
@@ -59,13 +59,14 @@ function mainMenu(){
                 if (err) throw err;
 
                 if (parseInt(answer.quantity) > res[0].stock_quantity){
-                    console.log("Sorry, there's not enough in stock to complete you're order.");
-                    console.log("Try a different quantity or a different item.")
+                    console.log("\nSorry, there's not enough in stock to complete you're order.");
+                    console.log("Try a different quantity or a different item.\n")
                     mainMenu();
                 }else{
                     var purchasePrice = res[0].price * parseInt(answer.quantity);
                     var updateStock = res[0].stock_quantity - parseInt(answer.quantity);
                     var updateSales = res[0].product_sales + answer.quantity * res[0].price;
+                    var department = res[0].department_name;
                     connection.query(
                         'UPDATE products SET ? WHERE ?', 
                         [
@@ -80,10 +81,34 @@ function mainMenu(){
                         function(err){
                         if (err) throw err;
                         console.log("\nYou're order has been processed!  The total cost of your purchase was $%s.".magenta.bold, purchasePrice); 
-                        console.log("Thank you for shopping at Bamazon.\n\n".magenta.bold);
-                        connection.end();
-                    }
-                    )
+                        console.log("Thank you for shopping at Bamazon.\n".magenta.bold);
+                            connection.query(
+                                'UPDATE departments SET product_sales = departments.product_sales + ? WHERE department_name = ?', [purchasePrice, department], function (err) {
+                                    if (err) throw err;
+                                    console.log("\n(Department sales have been updated.)\n\n".magenta.bold);
+                                    connection.end();
+                                }
+                            );
+                        }
+                    );
+
+                    // connection.query(
+                    //     'UPDATE bamazon.departments SET ? WHERE ?'
+                    //     [
+                    //     {
+                    //         product_sales: product_sales + purchasePrice
+                    //     },
+                    //     {
+                    //         department_name: department
+                    //     }
+                    //     ],
+                    //     function (err) {
+                    //         if (err) throw err;
+                    //         console.log("\n");
+                    //         console.log(purchasePrice);
+                    //         connection.end();
+                    //     }
+                    // );
                 }
             });
         });

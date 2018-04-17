@@ -13,17 +13,17 @@ var connection = mysql.createConnection({
 //Display store manager header and send to main menu
 connection.connect(function (err) {
     if (err) throw err;
-    console.log("__________________________________________________________________________________________________________________".blue.bold);
-    console.log("|``````````````````````````````````````````````".blue.bold +"Manager View"+"``````````````````````````````````````````````````````|".blue.bold);
-    console.log("|`````````````````".blue.bold+"_________  _______  ____   ___  ___________________ ________  ___  ___".red.bold+"`````````````````````````|".blue.bold);
-    console.log("|````````````````".blue.bold+"/\\  <\\>   \\/       \\/    \\ /   \\/    _________     //   ___  \\/   \\/   \\".red.bold+"````````````````````````|".blue.bold);
-    console.log("|````````````````".blue.bold+"\\ \\_______/\\   <\\>  \\     \\     \\   <\\>  \\ _ /    / |   \\  \\  \\         \\".red.bold+"```````````````````````|".blue.bold);
-    console.log("|`````````````````".blue.bold+"\\ \\  <\\>  `\\        \\           \\        \\ /    /___\\   \\__/  |         \\".red.bold+"``````````````````````|".blue.bold);
-    console.log("|``````````````````".blue.bold+"\\ \\_______/\\____\\   \\___/\\/\\____\\____\\   \\__________\\_______/ \\___/\\    \\".red.bold+"`````````````````````|".blue.bold);
-    console.log("|```````````````````".blue.bold+"\\/______/\\/___/ \\___\\_/\\/\\/____/____/\\___\\_________/______/ \\/__/\\ \\____\\".red.bold+"````````````````````|".blue.bold);
-    console.log("|`````````````````````````````````".blue.bold+"\\/____/               \\/___/                        \\/____/".red.bold +"````````````````````|".blue.bold);
-    console.log("|````````````````````````````````````````````````````````````````````````````````````````````````````````````````|".blue.bold);
-    console.log("|________________________________________________________________________________________________________________|".blue.bold);
+    console.log("_________________________________________________________________________________________________________________________".blue.bold);
+    console.log("|```````````````````````````````````````````````````".blue.bold +"Manager View"+"````````````````````````````````````````````````````````|".blue.bold);
+    console.log("|``````````````````````".blue.bold+"_________  _______  ____   ___  ___________________ ________  ___  ___".red.bold+"```````````````````````````|".blue.bold);
+    console.log("|`````````````````````".blue.bold+"/\\  <\\>   \\/       \\/    \\ /   \\/    _________     //   ___  \\/   \\/   \\".red.bold+"``````````````````````````|".blue.bold);
+    console.log("|`````````````````````".blue.bold+"\\ \\_______/\\   <\\>  \\     \\     \\   <\\>  \\ _ /    / |   \\  \\  \\         \\".red.bold+"`````````````````````````|".blue.bold);
+    console.log("|``````````````````````".blue.bold+"\\ \\  <\\>  `\\        \\           \\        \\ /    /___\\   \\__/  |         \\".red.bold+"````````````````````````|".blue.bold);
+    console.log("|```````````````````````".blue.bold+"\\ \\_______/\\____\\   \\___/\\/\\____\\____\\   \\__________\\_______/ \\___/\\    \\".red.bold+"```````````````````````|".blue.bold);
+    console.log("|````````````````````````".blue.bold+"\\/______/\\/___/ \\___\\_/\\/\\/____/____/\\___\\_________/______/ \\/__/\\ \\____\\".red.bold+"``````````````````````|".blue.bold);
+    console.log("|``````````````````````````````````````".blue.bold+"\\/____/               \\/___/                        \\/____/".red.bold +"``````````````````````|".blue.bold);
+    console.log("|```````````````````````````````````````````````````````````````````````````````````````````````````````````````````````|".blue.bold);
+    console.log("|_______________________________________________________________________________________________________________________|".blue.bold);
     mainMenu();
 });
 
@@ -89,7 +89,7 @@ function viewProducts(){
     connection.query('SELECT item_id, product_name, price, department_name, stock_quantity FROM products', function (err, res) {
         var table = new Table({
             head: ['Item ID', 'Product Name', 'Price ($)', 'Department', 'Stock Quantity']
-            , colWidths: [10, 55, 20, 40, 20]
+            , colWidths: [10, 45, 12, 30, 18]
         });
         for (i = 0; i < res.length; i++) {
             table.push([res[i].item_id, res[i].product_name, res[i].price, res[i].department_name, res[i].stock_quantity]);
@@ -187,10 +187,9 @@ function addProduct(){
             },
             function (err, res) {
                 if (err) throw err;
-                console.log("You've successfully added %s.  It is now being sold on Bamazon.", data.product);
-                // Call updateProduct AFTER the INSERT completes
             }
         );
+        console.log("\nYou've successfully added %s.  It is now being sold on Bamazon.\n".magenta.bold, data.product);
         exitOption();
     });
 

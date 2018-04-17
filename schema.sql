@@ -38,3 +38,5 @@ VALUE ("Pet Supplies", 500, 1500),
     ("Accessories", 400, 500),
     ("Beauty and Health", 950, 1000),
     ("Food and Beverage", 1200, 1500);
+
+SELECT * FROM bamazon.departments;

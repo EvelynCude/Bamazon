@@ -80,7 +80,7 @@ function viewSales(){
     '(departments.product_sales - departments.over_head_costs) AS total_profit FROM departments', function(err, res){
         var table = new Table({
             head: ['Department ID', 'Department Name', 'Overhead Costs', 'Product Sales', 'Total Profit']
-            , colWidths: [15, 55, 20, 20, 20]
+            , colWidths: [15, 45, 18, 15, 15]
         });
         for (i = 0; i < res.length; i++) {
             table.push([res[i].department_id, res[i].department_name, res[i].over_head_costs, res[i].product_sales, res[i].total_profit]);
@@ -109,14 +109,14 @@ function newDepartment() {
             "INSERT INTO departments SET ?",
             {
                 department_name: data.department,
-                over_head_cost: data.overhead,
+                over_head_costs: data.overhead,
                 product_sales: 0.00
             },
             function (err, res) {
                 if (err) throw err;
-                console.log("You've successfully added the %s department to Bamazon.", data.department_name);
             }
         );
+        console.log("\nYou've successfully added the %s department to Bamazon.\n".magenta.bold, data.department);          
         exitOption();
     });
 }
