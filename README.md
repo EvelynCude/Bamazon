@@ -48,3 +48,22 @@ The manager application is a Node application called `bamazonManager.js`. Runnin
 5) If a manager selects `Add New Product`, it will allow the manager to add a completely new product to the store.
 
 ![Bamazon Manager Image](/Manager.PNG)   
+
+
+
+## Supervisor Application
+
+The supervisor application is a Node app called `bamazonSupervisor.js`. Running this application will list the following menu options:
+
+   * View Product Sales by Department
+   
+   * Create New Department
+
+1) When a supervisor selects `View Product Sales by Department`, the app will display a summarized table in their terminal/bash window.
+
+   * The `total_profit` column is be calculated on the fly using the difference between `over_head_costs` and `product_sales`. `total_profit` is not stored in any database. It uses a custom alias.
+
+2) When the supervisor select `Create New Department`, the app will display a prompt that will let the supervisor add a new department.
+
+![Bamazon Supervisor Image](/Supervisor.PNG) 
+
