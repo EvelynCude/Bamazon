@@ -7,7 +7,10 @@ Bamazon is a CLI Amazon-like storefront created using Node and MySQL.  It takes 
 * [Video of typical user flows through the application found here](https://www.youtube.com/watch?v=Zb3xl9Cy2Eo).
 
 
+
 ### Customer Application
+
+![Bamazon Customer Image](Customer.png) 
 
 The customer application is a Node application called `bamazonCustomer.js`.  Running this application:
 
