@@ -10,7 +10,7 @@ Bamazon is a CLI Amazon-like storefront created using Node and MySQL.  It takes 
 
 ### Customer Application
 
-![Bamazon Customer Image](Customer.png) 
+![Bamazon Customer Image](Customer.PNG) 
 
 The customer application is a Node application called `bamazonCustomer.js`.  Running this application:
 
@@ -27,4 +27,4 @@ The customer application is a Node application called `bamazonCustomer.js`.  Run
    * If Bamazon _does_ have enough of the product, the customer's order is fulfilled.
 
 
-![Bamazon Customer Image](/Customer.png)   
+![Bamazon Customer Image](/Customer.PNG)   
