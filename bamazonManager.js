@@ -1,7 +1,9 @@
+//  Initialize npm packages
 var colors = require('colors');
 var inquirer = require('inquirer');
 var Table = require('cli-table');
 var mysql = require('mysql');
+//  Store mysql connection in variable
 var connection = mysql.createConnection({
     host: 'localhost',
     port: 3306,
@@ -42,6 +44,7 @@ function mainMenu() {
                 'Exit'
             ]
         }
+    //  Call function depending on user answer/choice
     ]).then(function (data) {
         switch (data.queryType) {
             case 'View Products for Sale':
@@ -153,6 +156,7 @@ function addInventory(){
         });
 }
 
+//  Function to add a product
 function addProduct(){
     inquirer.prompt([
 

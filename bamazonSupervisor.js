@@ -1,7 +1,9 @@
+//  Initialize npm packages
 var colors = require('colors');
 var inquirer = require('inquirer');
 var Table = require('cli-table');
 var mysql = require('mysql');
+//  Store mysql connection in variable
 var connection = mysql.createConnection({
     host: 'localhost',
     port: 3306,
@@ -53,6 +55,7 @@ function mainMenu() {
         };
     });
 }
+// Provide Supervisor ability to go to main menu or exit after every result
 function exitOption() {
     inquirer.prompt([
         {
@@ -75,6 +78,7 @@ function exitOption() {
     });
 }
 
+//  Function to view department sales
 function viewSales(){
     connection.query('SELECT departments.department_id, departments.department_name, departments.over_head_costs, departments.product_sales,' +
     '(departments.product_sales - departments.over_head_costs) AS total_profit FROM departments', function(err, res){
@@ -91,7 +95,7 @@ function viewSales(){
 }
 
 
-
+//  Function to add new deparment
 function newDepartment() {
     inquirer.prompt([
         {
